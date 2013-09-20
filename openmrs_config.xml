@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp> 
+<data>
+     
+    <record model="ir.ui.view" id="connect_config_form_view">
+        <field name="name">openmrs.connect.form</field>
+        <field name="model">openmrs.connect</field>
+        <field name="arch" type="xml">
+            <form string="Connection" >
+                <field name="ip_address" string="Address"/>
+                <field name="port" string="Port"/>
+                <field name="username" string="Username"/>
+                <field name="password" string="Password"/>
+                <field name="database" string="Database"/>
+                <field name="identifier_type" string="ID type"/>
+                <button name="test_sync" string="Test connection" type="object"/>
+                <button name="synchronize" string="Synchronize Patients" type="object"/>
+                
+            </form>
+        </field>
+      </record>
+
+      <record model="ir.ui.view" id="connect_config_tree_view">
+        <field name="name">openmrs.connect.tree</field>
+        <field name="model">openmrs.connect</field>
+        <field name="arch" type="xml">
+            <tree string="Connection">
+                <field name="ip_address" string="Address"/>
+                <field name="port" string="Port"/>
+                <field name="username" string="Username"/>
+                <field name="password" string="Password"/>
+            </tree>
+        </field>
+      </record>
+
+     <record model="ir.actions.act_window" id="action_connect_config_view">
+            <field name="name">Config Form</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">openmrs.connect</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+       </record>
+
+<menuitem name= "Medical" id="patient_menu" sequence="1" />  
+
+<menuitem name="Patients" icon="terp-project" id="patient_enrolment_menu" parent="patient_menu" action="action_list_patients"  sequence="1"/>
+<menuitem name="Patients" parent="patient_enrolment_menu" id="patient_listing" action="action_list_patients" sequence="1"/> 
+
+     
+<menuitem name="Visits" icon="terp-project" id="patient_visits" action="action_visit_type" parent="patient_menu" groups="base.group_system" sequence="2"/>
+<menuitem name="All Visits" icon="terp-project" id="patient_all_visits" action="action_patient_visit" parent="patient_visits" groups="base.group_system" sequence="1"/>
+<menuitem name="Todays Visits" icon="terp-project" id="patient_today_visits" action="action_patient_visit" parent="patient_visits" groups="base.group_system" sequence="2"/>
+
+
+<menuitem name="Medical Orders" parent="patient_menu" id="medical_orders" action="action_medical_orders" sequence="2"/>
+<menuitem name="All Orders" parent="medical_orders" id="medical_orders_all" action="action_medical_orders" sequence="1"/> 
+
+
+<menuitem name="Configuration" icon="terp-project" id="connect_config" action="action_connect_config_view" parent="patient_menu" groups="base.group_system" sequence="10"/>
+<menuitem name="Openmrs Config" icon="terp-project" id="openmrs_connect_config" action="action_connect_config_view" parent="connect_config" groups="base.group_system" sequence="1"/>
+<menuitem name="Medical Order Categories" parent="connect_config" id="menu_order_category" action="action_order_category" sequence="3" />
+
+
+<menuitem name="Patient Visit Types" parent="connect_config" id="patient_visit_types" action="action_visit_type" sequence="2" /> 
+
+
+  
+</data>
+</openerp>
